@@ -20,8 +20,9 @@ def index():
 @app.route("/add", methods=["POST"])
 def add():
     title = request.form.get('title')
-    new_task = Task(title)
-    db.add_task_to_db(new_task)
+    if title:
+        new_task = Task(title)
+        db.add_task_to_db(new_task)
     return redirect(url_for('index'))
 
 
