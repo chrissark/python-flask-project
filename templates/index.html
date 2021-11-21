@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');\
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    header {
+      background: linear-gradient(90deg, rgba(131,58,180,1) 0%,
+                                         rgba(253,29,29,1) 50%,
+                                         rgba(252,176,69,1) 100%);
+      padding: 30px 40px;
+      color: white;
+      text-align: center;
+    }
+
+    input {
+      width: 75%;
+      margin-right: 0;
+      padding: 10px;
+      border: none;
+      font-size: 14px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    .submit {
+       width: 25%;
+       padding: 10px;
+       margin-left:0;
+       background: #d9d9d9;
+       color: #555;
+       text-align: center;
+       font-size: 14px;
+       cursor: pointer;
+       transition: 0.3s;
+       font-family: Verdana, Geneva, Tahoma, sans-serif;
+       font-weight: bold;
+    }
+
+    .submit {
+       background-color: #bbb;
+       color: #FFF;
+    }
+
+
+    h1 {
+       font-family: 'Acme', sans-serif;
+       letter-spacing: 2px;
+       align-content: center;
+    }
+
+    ul li {
+       position: relative;
+       left: 0;
+       padding: 12px 8px 12px 40px;
+       list-style-type: none;
+       font-size: 14px;
+       transition: 0.2s;
+       background: #eee;
+       font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+       -webkit-user-select: none;
+       -moz-user-select: none;
+       -ms-user-select: none;
+       user-select: none;
+    }
+
+    ul li:hover {
+       background: #ddd;
+    }
+
+    .completed {
+       display: block;
+       padding: 12px 8px 12px 40px;
+       background: MediumAquaMarine;
+    }
+
+    .completed:hover {
+       background: AquaMarine;
+    }
+
+    .span button {
+       display: inline;
+    }
+
+    .delete {
+         outline: none;
+         position: absolute;
+         right: 0;
+         top: 0;
+         font-size: 14px;
+         text-decoration: none;
+         padding: 12px 16px 12px 16px;
+    }
+
+    .delete:link, .delete:visited, delete.focus {
+       color: black;
+    }
+
+    .delete:hover {
+       background-color: tomato;
+       color: white;
+    }
+
+    .task {
+         сursor: pointer;
+         display: inline;
+         outline: none;
+         font-size: 14px;
+         text-decoration: none;
+         padding: 12px 16px 12px 16px;
+         color: black;
+    }
+
+    .task:link, .task:visited, task.focus {
+       color: black;
+    }
+
+
+
+
+
+</style>
+<head>
+    <title>ToDo List</title>
+</head>
+<body>
+  <header>
+    <h1> ToDo List </h1>
+    <form action="/add" method="post">
+        <div class="app">
+             <input id="userType" type="text" name="title" placeholder="Things to be done..."><br>
+            <div>
+                  <p>
+                      <button class="submit" type="submit">Add</button>
+                  </p>
+            </div>
+        </div>
+    </form>
+  </header>
+  <form>
+        {% for key, task in list_of_tasks.items() %}
+            <ul id="list of tasks">
+                {% if task.is_completed == False %}
+                <li>
+                    <a class="task" href="/update/{{key}}">	{{key + 1}}. {{task.title}}</a>
+                    <span class="span button">
+                        <a class="delete" href="/delete/{{ key }}">Remove</a>
+                    </span>
+                </li>
+                {% else %}
+                 <li class="completed">
+                     <a class="task" href="/update/{{key}}">{{key + 1}}. {{task.title}} &#10004</a>
+                     <span class="span button">
+                        <a class="delete" href="/delete/{{ key }}">Remove</a>
+                     </span>
+                </li>
+                    {% endif %}
+            </ul>
+        {% endfor %}
+    </form>
+
+
+
+
+
+</body>
+</html>
